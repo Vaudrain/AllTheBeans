@@ -1,0 +1,10 @@
+version: '0.1'
+services:
+  frontend:
+    container_name: AllTheBeans-FrontEnd
+    build:
+      context: ./FrontEnd        
+      args:
+        PORT: 8080
+    ports:
+     - "8080:8080"
