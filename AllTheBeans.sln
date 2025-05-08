@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeansAPI", "BackEnd\BeansAPI.csproj", "{7AF5D07D-AE79-ED11-453F-6328BFAD067A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7AF5D07D-AE79-ED11-453F-6328BFAD067A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF5D07D-AE79-ED11-453F-6328BFAD067A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AF5D07D-AE79-ED11-453F-6328BFAD067A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF5D07D-AE79-ED11-453F-6328BFAD067A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4684500-CE5D-4553-96E9-C1C4D2DCAA3F}
+	EndGlobalSection
+EndGlobal

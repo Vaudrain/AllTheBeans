@@ -8,3 +8,12 @@ services:
         PORT: 8080
     ports:
      - "8080:8080"
+  backend:
+    container_name: AllTheBeans-BackEnd
+    build:
+      context: ./BackEnd
+      args:
+        PORT: 5000
+    ports:
+     - "5000:5000"
+     - "7000:7000"

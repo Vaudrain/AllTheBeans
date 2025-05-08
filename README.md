@@ -20,7 +20,6 @@ If running via Docker
 docker-compose up
 ```
 
-
 ### Running tests
 
 ```bash
@@ -40,7 +39,28 @@ docker-compose up
 
 #### Back end
 
-- **DotNet Core**
+- **DotNet Core** - I chose DotNet Core as it was mentioned in the brief, and I have been away from it for a few years so wanted a refresher.
+- DB is currently an in-memory solution for testing. ***TODO*** switch to SQL, Redis, or mongoDB.
+- ***TODO*** Tests necessary here?
+
+---
+
+# To Do List
+
+- Front End
+    - Responsive Layout
+    - Components
+        - List of beans (with search)
+            - bean list item
+        - Detailed bean view
+        - Bean of the Day (interactable for more info)
+    - Order form
+- Back End
+    - SQL, Redis or mongoDB
+    - Load from JSON file (save to json file?)
+    - Fetch bean of the day
+    - Determine bean of the day (not the same as the previous day)
+    - DB search query
 
 ---
 

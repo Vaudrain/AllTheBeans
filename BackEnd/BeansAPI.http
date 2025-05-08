@@ -1,0 +1,6 @@
+@BeansAPI_HostAddress = http://localhost:5000
+
+GET {{BeansAPI_HostAddress}}
+Accept: application/json
+
+###
