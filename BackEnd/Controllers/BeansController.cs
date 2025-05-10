@@ -24,14 +24,28 @@ namespace BeanApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Bean>> GetBean(Guid id)
         {
-            var Bean = await _context.Beans.FindAsync(id);
+            Bean? bean = await _context.Beans.FindAsync(id);
 
-            if (Bean == null)
+            if (bean == null)
             {
                 return NotFound();
             }
 
-            return Bean;
+            return bean;
+        }
+
+        [HttpGet("botd")]
+        public async Task<ActionResult<Bean>> GetBeanOfTheDay()
+        {
+            Guid BotdId = await _context.BeanOfTheDay.Select(b => b.BeanId).FirstOrDefaultAsync();
+            Bean? bean = await _context.Beans.Where(b => b.Id == BotdId).FirstOrDefaultAsync();
+
+            if (bean == null)
+            {
+                return NotFound();
+            }
+
+            return bean;
         }
 
         [HttpPut("{id}")]
@@ -67,7 +81,7 @@ namespace BeanApi.Controllers
         public async Task<ActionResult<Bean>> PostBean(Bean bean)
         {
             _context.Beans.Add(bean);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); // TODO error handling
 
             return CreatedAtAction(nameof(GetBean), new { id = bean.Id }, bean);
         }
@@ -75,13 +89,13 @@ namespace BeanApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBean(Guid id)
         {
-            var Bean = await _context.Beans.FindAsync(id);
-            if (Bean == null)
+            Bean? bean = await _context.Beans.FindAsync(id);
+            if (bean == null)
             {
                 return NotFound();
             }
 
-            _context.Beans.Remove(Bean);
+            _context.Beans.Remove(bean);
             await _context.SaveChangesAsync();
 
             return NoContent();
