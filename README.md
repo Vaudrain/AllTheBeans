@@ -62,7 +62,7 @@ docker-compose up
     - ~~Fetch bean of the day~~
     - ~~Determine bean of the day (not the same as the previous day)~~
         - ~~Run task daily~~
-    - DB search query
+    - ~~DB search query~~
 
 ---
 

@@ -48,6 +48,48 @@ namespace BeanApi.Controllers
             return bean;
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Bean>>> SearchBeans([FromQuery] string? name, [FromQuery] string? country, [FromQuery] string? colour, [FromQuery] float? lowerPrice, [FromQuery] float? upperPrice)
+        {
+            var query = _context.Beans.AsQueryable();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                // Potential scope to include description in the search here, if bean descriptions might contain alternate or related names
+                // Probably something that is more worth it for future iterations that include keywords etc.
+                query = query.Where(b => b.Name.ToLower().Contains(name.ToLower()));
+            }
+
+            if (!string.IsNullOrEmpty(country))
+            {
+                query = query.Where(b => b.Country.ToLower().Contains(country.ToLower()));
+            }
+
+            if (!string.IsNullOrEmpty(colour))
+            {
+                query = query.Where(b => b.Colour.ToLower().Contains(colour.ToLower()));
+            }
+
+            if (lowerPrice.HasValue)
+            {
+                query = query.Where(b => b.CostGBP >= lowerPrice.Value);
+            }
+
+            if (upperPrice.HasValue)
+            {
+                query = query.Where(b => b.CostGBP <= upperPrice.Value);
+            }
+
+            var results = await query.ToListAsync();
+
+            if (results.Count == 0)
+            {
+                return NotFound("No beans match the search criteria.");
+            }
+
+            return Ok(results);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBean(string id, Bean bean)
         {
