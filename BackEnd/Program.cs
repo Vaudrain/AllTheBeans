@@ -1,17 +1,22 @@
-using Microsoft.EntityFrameworkCore;
 using BeansAPI.Models;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<BeanContext>(options =>
-    options.UseInMemoryDatabase("BeansDb"));
+builder.Services.AddDbContext<BeanContext>();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
+
+// Ensure the database is created and seeded
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    BeanContext context = scope.ServiceProvider.GetRequiredService<BeanContext>();
+    context.Database.EnsureCreated();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

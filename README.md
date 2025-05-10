@@ -40,7 +40,7 @@ docker-compose up
 #### Back end
 
 - **DotNet Core** - I chose DotNet Core as it was mentioned in the brief, and I have been away from it for a few years so wanted a refresher.
-- DB is currently an in-memory solution for testing. ***TODO*** switch to SQL, Redis, or mongoDB.
+- **SQLite** - I chose SQLite as I wanted to use EF and a SQL database, but figured a full SQL server was probably overkill for this task.
 - ***TODO*** Tests necessary here?
 
 ---
@@ -56,10 +56,11 @@ docker-compose up
         - Bean of the Day (interactable for more info)
     - Order form
 - Back End
-    - SQL, Redis or mongoDB
+    - ~~SQL, Redis or mongoDB~~
     - Load from JSON file (save to json file?)
-    - Fetch bean of the day
-    - Determine bean of the day (not the same as the previous day)
+    - ~~Fetch bean of the day~~
+    - ~~Determine bean of the day (not the same as the previous day)~~
+        - Run task daily
     - DB search query
 
 ---
