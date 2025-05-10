@@ -12,4 +12,7 @@ public class BeanOfTheDay
 
     [ForeignKey("Bean")]
     public Guid BeanId { get; set; }
+
+    [Required]
+    public DateTime DateSet { get; set; }
 }

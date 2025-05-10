@@ -9,6 +9,9 @@
 # Built files
 out/*
 
+Hangfire*
+.vscode/*
+
 # User-specific files
 *.rsuser
 *.suo

@@ -43,26 +43,32 @@ public class BeanContext : DbContext
                 int BoTdTableSize = BeanOfTheDay.Count();
                 if (testBoTd == null || BoTdTableSize > 1)
                 {
-                    BeanOfTheDay.RemoveRange(BeanOfTheDay);                    
+                    BeanOfTheDay.RemoveRange(BeanOfTheDay);
                     BeanOfTheDay.Add(new BeanOfTheDay
                     {
                         Id = 0,
-                        BeanId = Guid.NewGuid(),
+                        BeanId = Guid.Empty,
+                        DateSet = DateTime.UnixEpoch,
                     });
                     this.SaveChanges();
-                    chooseBeanOfTheDay(); 
+                    ChooseBeanOfTheDay(); 
                 }
             });
     }
 
-    private void chooseBeanOfTheDay()
+    public void ChooseBeanOfTheDay()
     {
-        Guid currentBeanOfTheDay = BeanOfTheDay.FirstOrDefault()!.BeanId;
+        // Do nothing if we've set the bean of the day in the last 23 hours (to allow for slight time drift on the daily hangfire task)
+        DateTime timeLastSet = BeanOfTheDay.First().DateSet;
+        if (DateTime.Now <= timeLastSet.AddDays(0.96)) return;
+
+        Guid currentBeanOfTheDay = BeanOfTheDay.First().BeanId;
         Guid chosenBean = Beans.Where(b => b.Id != currentBeanOfTheDay)
                             .AsEnumerable() // AsEnumerable to use LINQ to Objects for random ordering
                             .OrderBy(b => Guid.NewGuid()) // Random order
-                            .Select(b => b.Id).FirstOrDefault();
-        BeanOfTheDay.FirstOrDefault()!.BeanId = chosenBean;
+                            .Select(b => b.Id).First();
+        BeanOfTheDay.First().BeanId = chosenBean;
+        BeanOfTheDay.First().DateSet = DateTime.Now;
         this.SaveChanges();
     }
 }

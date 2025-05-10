@@ -41,6 +41,7 @@ docker-compose up
 
 - **DotNet Core** - I chose DotNet Core as it was mentioned in the brief, and I have been away from it for a few years so wanted a refresher.
 - **SQLite** - I chose SQLite as I wanted to use EF and a SQL database, but figured a full SQL server was probably overkill for this task.
+- **Hangfire** - I used Hangfire to schedule a daily cron job for choosing the bean of the day as it should be robust in deployment, functioning even if the application is slept due to no API requests.
 - ***TODO*** Tests necessary here?
 
 ---
@@ -60,7 +61,7 @@ docker-compose up
     - Load from JSON file (save to json file?)
     - ~~Fetch bean of the day~~
     - ~~Determine bean of the day (not the same as the previous day)~~
-        - Run task daily
+        - ~~Run task daily~~
     - DB search query
 
 ---
