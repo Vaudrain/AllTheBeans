@@ -58,9 +58,9 @@ public class BeanContext : DbContext
     private void chooseBeanOfTheDay()
     {
         Guid currentBeanOfTheDay = BeanOfTheDay.FirstOrDefault()!.BeanId;
-        Guid RandomGuid = Guid.NewGuid(); // Needs to be generated before Linq query is executed.
         Guid chosenBean = Beans.Where(b => b.Id != currentBeanOfTheDay)
-                            .OrderBy(b => RandomGuid) // Random order
+                            .AsEnumerable() // AsEnumerable to use LINQ to Objects for random ordering
+                            .OrderBy(b => Guid.NewGuid()) // Random order
                             .Select(b => b.Id).FirstOrDefault();
         BeanOfTheDay.FirstOrDefault()!.BeanId = chosenBean;
         this.SaveChanges();
