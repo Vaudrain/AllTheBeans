@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace BeansAPI.Models;
 
@@ -8,10 +10,13 @@ namespace BeansAPI.Models;
 public class BeanOfTheDay
 {
     [Key]
-    public int Id { get; set; }
+    public required int Id { get; set; }
 
     [ForeignKey("Bean")]
-    public Guid BeanId { get; set; }
+    [Required]
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public required string BeanId { get; set; }
 
     [Required]
     public DateTime DateSet { get; set; }

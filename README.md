@@ -40,7 +40,7 @@ docker-compose up
 #### Back end
 
 - **DotNet Core** - I chose DotNet Core as it was mentioned in the brief, and I have been away from it for a few years so wanted a refresher.
-- **SQLite** - I chose SQLite as I wanted to use EF and a SQL database, but figured a full SQL server was probably overkill for this task.
+- **SQLite** - I chose SQLite as I wanted to use EF and a SQL database, but figured a full SQL server was probably overkill for this task. Looking at the seed data, MongoDB would have been a solid choice, as the IDs used there are MongoDB ObjectIDs.
 - **Hangfire** - I used Hangfire to schedule a daily cron job for choosing the bean of the day as it should be robust in deployment, functioning even if the application is slept due to no API requests.
 - ***TODO*** Tests necessary here?
 
@@ -58,7 +58,7 @@ docker-compose up
     - Order form
 - Back End
     - ~~SQL, Redis or mongoDB~~
-    - Load from JSON file (save to json file?)
+    - ~~Load from JSON file (save to json file? - no need identified by brief)~~
     - ~~Fetch bean of the day~~
     - ~~Determine bean of the day (not the same as the previous day)~~
         - ~~Run task daily~~

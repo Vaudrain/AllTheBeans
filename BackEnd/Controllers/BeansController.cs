@@ -22,7 +22,7 @@ namespace BeanApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Bean>> GetBean(Guid id)
+        public async Task<ActionResult<Bean>> GetBean(string id)
         {
             Bean? bean = await _context.Beans.FindAsync(id);
 
@@ -37,7 +37,7 @@ namespace BeanApi.Controllers
         [HttpGet("botd")]
         public async Task<ActionResult<Bean>> GetBeanOfTheDay()
         {
-            Guid BotdId = await _context.BeanOfTheDay.Select(b => b.BeanId).FirstOrDefaultAsync();
+            string BotdId = await _context.BeanOfTheDay.Select(b => b.BeanId).FirstOrDefaultAsync() ?? "";
             Bean? bean = await _context.Beans.Where(b => b.Id == BotdId).FirstOrDefaultAsync();
 
             if (bean == null)
@@ -49,7 +49,7 @@ namespace BeanApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBean(Guid id, Bean bean)
+        public async Task<IActionResult> PutBean(string id, Bean bean)
         {
             if (id != bean.Id)
             {
@@ -87,7 +87,7 @@ namespace BeanApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBean(Guid id)
+        public async Task<IActionResult> DeleteBean(string id)
         {
             Bean? bean = await _context.Beans.FindAsync(id);
             if (bean == null)
@@ -101,7 +101,7 @@ namespace BeanApi.Controllers
             return NoContent();
         }
 
-        private bool BeanExists(Guid id)
+        private bool BeanExists(string id)
         {
             return _context.Beans.Any(e => e.Id == id);
         }

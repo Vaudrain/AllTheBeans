@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace BeansAPI.Models;
 
@@ -8,13 +10,16 @@ namespace BeansAPI.Models;
 public class Bean
 {
     [Key]
-    public Guid Id { get; set; }
+    [Required]
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public required string Id { get; set; }
     [Required]
     public int Index { get; set; }
     [Required]
     public float CostGBP { get; set; }
     [Required]
-    public required string ImageUrl { get; set; }
+    public required string Image { get; set; }
     [Required]
     public required string Colour { get; set; }
     [Required]
@@ -23,4 +28,34 @@ public class Bean
     public required string Description { get; set; }
     [Required]
     public required string Country { get; set; }
+}
+
+// Used to read from the JSON file, since we don't use IsBOTD in bean table in the database
+// and some variable names are different (_id, lowercase colour)
+public class BeanDTO {
+
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public required string _id { get; set; }
+    public int Index { get; set; }
+    public bool IsBOTD { get; set; }
+    public float CostGBP { get; set; }
+    public required string Image { get; set; }
+    public required string colour { get; set; }
+    public required string Name { get; set; }
+    public required string Description { get; set; }
+    public required string Country { get; set; }
+
+    public Bean toBean() {
+        return new Bean {
+            Id = _id,
+            Index = Index,
+            CostGBP = CostGBP,
+            Image = Image,
+            Colour = colour,
+            Name = Name,
+            Description = Description,
+            Country = Country
+        };
+    }
 }
