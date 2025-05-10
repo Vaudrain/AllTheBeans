@@ -31,15 +31,15 @@ public class Bean
 }
 
 // Used to read from the JSON file, since we don't use IsBOTD in bean table in the database
-// and some variable names are different (_id, lowercase colour)
+// and some variable names are different (_id, CostGBP, lowercase colour, index)
 public class BeanDTO {
 
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public required string _id { get; set; }
-    public int Index { get; set; }
+    public int index { get; set; }
     public bool IsBOTD { get; set; }
-    public float CostGBP { get; set; }
+    public required string Cost { get; set; }
     public required string Image { get; set; }
     public required string colour { get; set; }
     public required string Name { get; set; }
@@ -49,8 +49,8 @@ public class BeanDTO {
     public Bean toBean() {
         return new Bean {
             Id = _id,
-            Index = Index,
-            CostGBP = CostGBP,
+            Index = index,
+            CostGBP = float.Parse(Cost.Replace("£", "").Trim()),
             Image = Image,
             Colour = colour,
             Name = Name,
