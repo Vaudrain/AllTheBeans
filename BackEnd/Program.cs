@@ -25,6 +25,8 @@ using (IServiceScope scope = app.Services.CreateScope())
 {
     BeanContext context = scope.ServiceProvider.GetRequiredService<BeanContext>();
     context.Database.EnsureCreated();
+    
+    RecurringJob.RemoveIfExists("ChooseBeanOfTheDay");
     RecurringJob.AddOrUpdate(
         "ChooseBeanOfTheDay",
         () => context.ChooseBeanOfTheDay(),
