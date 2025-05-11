@@ -68,7 +68,8 @@ Swagger is exposed even in production for ease of testing APIs. It can be found 
     - ~~Clean up CRUD API~~
     - ~~Hide ID from API using DTO~~
     - Ensure image string format is correct
-    - Check Docker works
+    - ~~Check Docker works~~
+- Check Integration works in Docker
 
 ---
 

@@ -17,6 +17,7 @@ builder.Services.AddHangfire(configuration => configuration
             .UseRecommendedSerializerSettings()
             .UseSQLiteStorage());
 builder.Services.AddHangfireServer();
+builder.WebHost.UseUrls("http://0.0.0.0:5000"); // Allow access when running in Docker
 
 WebApplication app = builder.Build();
 
