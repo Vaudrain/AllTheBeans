@@ -94,7 +94,16 @@ namespace BeanApi.Controllers
         [HttpPut("addBean")]
         [HttpPost]
         public async Task<IActionResult> AddBean(BeanApiDTO beanDTO)
-        {            
+        {
+            // We should also sanitise input here, but I'll say that's beyond the scope of this task
+            // for the purposes of this task, we'll just assume the input is safe
+            // but we would never assume this in a real application
+            BadRequestObjectResult? resultsInvalid = ValidateInput(beanDTO);
+            if (resultsInvalid != null)
+            {
+                return resultsInvalid;
+            }
+
             int highestIndex = await _context.Beans.MaxAsync(b => b.Index);
             Bean newBean = beanDTO.CreateBean(highestIndex + 1);
 
@@ -103,6 +112,60 @@ namespace BeanApi.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
+        }
+
+        private BadRequestObjectResult? ValidateInput(BeanApiDTO beanDTO)
+        {
+            string errorMessage = "";
+            if (string.IsNullOrEmpty(beanDTO.Name))
+            {
+                errorMessage += "Name is required. ";
+            }
+            if (string.IsNullOrEmpty(beanDTO.Description))
+            {
+                errorMessage += "Description is required. ";
+            }
+            if (string.IsNullOrEmpty(beanDTO.Country))
+            {
+                errorMessage += "Country is required. ";
+            }
+            if (string.IsNullOrEmpty(beanDTO.Colour))
+            {
+                errorMessage += "Colour is required. ";
+            }
+            if (string.IsNullOrEmpty(beanDTO.Image))
+            {
+                errorMessage += "Image is required. ";
+            } else {
+                try
+                {
+                    var uri = new Uri(beanDTO.Image);
+                    if (!uri.IsAbsoluteUri 
+                        || (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps))
+                        // this is also where we should check if the image is a valid image type and not malicious
+                        // but that's a bit more complicated and probably beyond the scope of this task
+                    {
+                        errorMessage += "Image format incorrect, it should be a link to an image. ";
+                    }
+                }
+                catch
+                {
+                    errorMessage += "Image format incorrect, it should be a link to an image. ";
+                }
+            }
+            if (beanDTO.CostGBP <= 0)
+            {
+                errorMessage += "Cost is required and must be greater than 0. ";
+            }
+
+            // There's probably more validation we could do here, but this will do for now
+
+            if (string.IsNullOrEmpty(errorMessage))
+            {
+                return null;
+            }
+
+            return BadRequest(errorMessage);
         }
 
         [HttpDelete("{index}")]
