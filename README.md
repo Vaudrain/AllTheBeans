@@ -6,7 +6,7 @@ The repository contains my solution for a technical task set by Tombola titled a
 
 ### Running the solution
 
-The solution can be ran manually or through Docker using the provided Dockerfile using the following instructions. In either case, the project will be located at http://localhost:8080/
+The solution can be ran manually or through Docker using the provided Dockerfile using the following instructions. In either case, the project will be located at http://localhost:8080/ (front-end) or http://localhost:5000/ (back-end)
 
 If running manually
 
@@ -19,6 +19,8 @@ If running via Docker
 ```bash
 docker-compose up
 ```
+
+Swagger is exposed even in production for ease of testing APIs. It can be found at http://localhost:5000/swagger
 
 ### Running tests
 
@@ -63,6 +65,10 @@ docker-compose up
     - ~~Determine bean of the day (not the same as the previous day)~~
         - ~~Run task daily~~
     - ~~DB search query~~
+    - ~~Clean up CRUD API~~
+    - ~~Hide ID from API using DTO~~
+    - Ensure image string format is correct
+    - Check Docker works
 
 ---
 

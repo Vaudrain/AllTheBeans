@@ -16,26 +16,27 @@ namespace BeanApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Bean>>> GetBeans()
+        public async Task<ActionResult<IEnumerable<BeanApiDTO>>> GetBeans()
         {
-            return await _context.Beans.ToListAsync();
+            Bean[] beans = await _context.Beans.ToArrayAsync();
+            return beans.Select(b => b.ToBeanApiDTO()).ToList();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Bean>> GetBean(string id)
+        [HttpGet("{index}")]
+        public async Task<ActionResult<BeanApiDTO>> GetBean(int index)
         {
-            Bean? bean = await _context.Beans.FindAsync(id);
+            Bean? bean = await _context.Beans.FirstOrDefaultAsync(b => b.Index == index);
 
             if (bean == null)
             {
                 return NotFound();
             }
 
-            return bean;
+            return bean.ToBeanApiDTO();
         }
 
         [HttpGet("botd")]
-        public async Task<ActionResult<Bean>> GetBeanOfTheDay()
+        public async Task<ActionResult<BeanApiDTO>> GetBeanOfTheDay()
         {
             string BotdId = await _context.BeanOfTheDay.Select(b => b.BeanId).FirstOrDefaultAsync() ?? "";
             Bean? bean = await _context.Beans.Where(b => b.Id == BotdId).FirstOrDefaultAsync();
@@ -45,11 +46,11 @@ namespace BeanApi.Controllers
                 return NotFound();
             }
 
-            return bean;
+            return bean.ToBeanApiDTO();
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Bean>>> SearchBeans([FromQuery] string? name, [FromQuery] string? country, [FromQuery] string? colour, [FromQuery] float? lowerPrice, [FromQuery] float? upperPrice)
+        public async Task<ActionResult<IEnumerable<BeanApiDTO>>> SearchBeans([FromQuery] string? name, [FromQuery] string? country, [FromQuery] string? colour, [FromQuery] float? lowerPrice, [FromQuery] float? upperPrice)
         {
             var query = _context.Beans.AsQueryable();
 
@@ -87,51 +88,27 @@ namespace BeanApi.Controllers
                 return NotFound("No beans match the search criteria.");
             }
 
-            return Ok(results);
+            return Ok(results.Select(b => b.ToBeanApiDTO()).ToList());
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBean(string id, Bean bean)
-        {
-            if (id != bean.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(bean).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BeanExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
+        [HttpPut("addBean")]
         [HttpPost]
-        public async Task<ActionResult<Bean>> PostBean(Bean bean)
-        {
-            _context.Beans.Add(bean);
-            await _context.SaveChangesAsync(); // TODO error handling
+        public async Task<IActionResult> AddBean(BeanApiDTO beanDTO)
+        {            
+            int highestIndex = await _context.Beans.MaxAsync(b => b.Index);
+            Bean newBean = beanDTO.CreateBean(highestIndex + 1);
 
-            return CreatedAtAction(nameof(GetBean), new { id = bean.Id }, bean);
+            _context.Beans.Add(newBean);
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBean(string id)
+        [HttpDelete("{index}")]
+        public async Task<IActionResult> DeleteBean(int index)
         {
-            Bean? bean = await _context.Beans.FindAsync(id);
+            Bean? bean = await _context.Beans.FirstOrDefaultAsync(b => b.Index == index);
             if (bean == null)
             {
                 return NotFound();
@@ -140,12 +117,7 @@ namespace BeanApi.Controllers
             _context.Beans.Remove(bean);
             await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
-
-        private bool BeanExists(string id)
-        {
-            return _context.Beans.Any(e => e.Id == id);
+            return Ok();
         }
     }
 }

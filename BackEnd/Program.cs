@@ -25,7 +25,7 @@ using (IServiceScope scope = app.Services.CreateScope())
 {
     BeanContext context = scope.ServiceProvider.GetRequiredService<BeanContext>();
     context.Database.EnsureCreated();
-    
+
     RecurringJob.RemoveIfExists("ChooseBeanOfTheDay");
     RecurringJob.AddOrUpdate(
         "ChooseBeanOfTheDay",
@@ -33,12 +33,12 @@ using (IServiceScope scope = app.Services.CreateScope())
         Cron.Daily(0)); // Run every day at midnight
 }
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+// In a real environment, we wouldn't use swagger in production, but for ease of testing for Tombola, we will
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
 

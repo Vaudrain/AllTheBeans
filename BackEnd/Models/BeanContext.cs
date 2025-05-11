@@ -32,10 +32,10 @@ public class BeanContext : DbContext
 
                 string SeededBeanOfTheDay = "";
 
-                BeanDTO[] seedBeans = JsonSerializer.Deserialize<BeanDTO[]>(File.ReadAllText("Data/SeedBeanData.json")) ?? Array.Empty<BeanDTO>();
-                foreach (BeanDTO seedBean in seedBeans)
+                BeanJsonDTO[] seedBeans = JsonSerializer.Deserialize<BeanJsonDTO[]>(File.ReadAllText("Data/SeedBeanData.json")) ?? [];
+                foreach (BeanJsonDTO seedBean in seedBeans)
                 {
-                    Beans.Add(seedBean.toBean());
+                    Beans.Add(seedBean.ToBean());
                     if (seedBean.IsBOTD)
                     {
                         // If the seed data has multiple beans of the day, we will just take the last one
