@@ -52,7 +52,7 @@ public class BeanJsonDTO {
     [BsonRepresentation(BsonType.ObjectId)]
     public required string _id { get; set; }
     public required int index { get; set; }
-    public required bool IsBOTD { get; set; }
+    public required bool isBOTD { get; set; }
     public required string Cost { get; set; }
     public required string Image { get; set; }
     public required string colour { get; set; }

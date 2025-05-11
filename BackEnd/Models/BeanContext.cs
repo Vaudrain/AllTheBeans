@@ -36,7 +36,7 @@ public class BeanContext : DbContext
                 foreach (BeanJsonDTO seedBean in seedBeans)
                 {
                     Beans.Add(seedBean.ToBean());
-                    if (seedBean.IsBOTD)
+                    if (seedBean.isBOTD)
                     {
                         // If the seed data has multiple beans of the day, we will just take the last one
                         SeededBeanOfTheDay = seedBean._id;
