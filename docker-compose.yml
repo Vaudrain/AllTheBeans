@@ -8,6 +8,8 @@ services:
         PORT: 8080
     ports:
      - "8080:8080"
+    relies on:
+      - backend
   backend:
     container_name: AllTheBeans-BackEnd
     build:

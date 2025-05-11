@@ -1,6 +1,33 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import Title from './components/Title.vue';
+import { type Bean, useBeanStore } from './stores/beanStore';
+import { onMounted } from 'vue';
+
+const beanStore = useBeanStore();
+
+onMounted(async () => {
+  try {
+    const response = await fetch('http://localhost:5000/api/Beans');
+    if (!response.ok) {
+      throw new Error(`Error fetching beans: ${response.statusText}`);
+    }
+    beanStore.setBeans(await response.json() as Bean[]);
+  } catch (error) {
+    console.error(error);
+  }
+
+  try {
+    const response = await fetch('http://localhost:5000/api/Beans/botd');
+      if (!response.ok) {
+        throw new Error(`Error fetching bean of the day: ${response.statusText}`);
+      }
+      beanStore.setBeanOfTheDayIndex((await response.json() as Bean).index);
+  } catch (error) {
+      console.error(error);
+  }
+});
+
 </script>
 
 <template>
@@ -9,7 +36,7 @@ import HelloWorld from './components/HelloWorld.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="All the Beans!" />
+      <Title msg="All the Beans!" />
 
       <nav>
         <RouterLink to="/">Bean of the Day</RouterLink>

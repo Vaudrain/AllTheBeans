@@ -6,7 +6,7 @@ The repository contains my solution for a technical task set by Tombola titled a
 
 ### Running the solution
 
-The solution can be ran manually or through Docker using the provided Dockerfile using the following instructions. In either case, the project will be located at http://localhost:8080/ (front-end) or http://localhost:5000/ (back-end)
+The solution can be ran manually or through Docker using the provided Dockerfile using the following instructions. In either case, the project will be located at http://localhost:8080/ (front-end) or http://localhost:5000/ (back-end). The front-end relies on the back-end running to fetch bean data - it will error in the console if it is not.
 
 If running manually
 
@@ -56,7 +56,7 @@ Swagger is exposed even in production for ease of testing APIs. It can be found 
         - List of beans (with search)
             - bean list item
         - Detailed bean view
-        - Bean of the Day (interactable for more info)
+        - ~~Bean of the Day (interactable for more info - I'm going to say this is true because it's a page you can navigate to, even though you start there)~~
     - Order form
 - Back End
     - ~~SQL, Redis or mongoDB~~
