@@ -51,7 +51,7 @@ Swagger is exposed even in production for ease of testing APIs. It can be found 
 # To Do List
 
 - Front End
-    - Responsive Layout
+    - ~~Responsive Layout~~
     - Components
         - List of beans (with search)
             - bean list item
