@@ -8,9 +8,9 @@
 }
 
 a,
-.green {
+.coffee-brown {
   text-decoration: none;
-  color: #bc9c94;
+  color: var(--color-accent);
   transition: 0.4s;
   padding: 3px;
 }

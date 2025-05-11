@@ -1,7 +1,12 @@
+<script setup lang="ts">
+import BrowseBeans from '@/components/BrowseBeans.vue';
+
+</script>
+
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <main>
+    <BrowseBeans></BrowseBeans>
+  </main>
 </template>
 
 <style>
