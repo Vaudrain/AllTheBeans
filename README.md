@@ -1,32 +1,41 @@
 # AllTheBeans
+The repository contains my solution for a technical task set by Tombola titled "All The Beans" (brief below). The solution can be run locally via Docker or directly. See [Running the solution](#running-the-solution) for detailed instructions. I may decide host it on my personal webserver, and will update this repo with a link if I do.
 
-The repository contains my solution for a technical task set by Tombola titled all the beans (brief below). The solution can be found hosted at https://vaud.uk/allthebeans, or ran locally.
+Unfortunate personal circumstances have made my time working on this quite unstable and prone to interruption. I have spent significantly more time than I intended on the task and my workflow has been sub-standard; I have not had time to implement tests - really, I should have done it as I was going through, but I failed to sit down and plan out the architecture in advance. Regardless, I believe I have created a product that meets the spec for both scenarios.
 
 ## Covering Note
 
 ### Running the solution
 
-The solution can be ran manually or through Docker using the provided Dockerfile using the following instructions. In either case, the project will be located at http://localhost:8080/ (front-end) or http://localhost:5000/ (back-end). The front-end relies on the back-end running to fetch bean data - it will error in the console if it is not.
+The solution can be ran in dev builds or through Docker using the provided Dockerfile using the following instructions. The project will be located at http://localhost:8080/ (front-end, docker), http://localhost:5173/ (front-end, dev), and http://localhost:5000/ (back-end). The front-end relies on the back-end running to fetch bean data - it will error in the browser console if it is not.
 
-If running manually
+If running dev builds:
 
 ```bash
-TODO instructions to build & run front & backend
+# For the backend
+cd ./BackEnd
+dotnet run
+
+# For the frontend
+cd ./Frontend
+npm run dev
 ```
 
 If running via Docker
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
-Swagger is exposed even in production for ease of testing APIs. It can be found at http://localhost:5000/swagger
+Swagger is exposed even in production for ease of testing APIs. It is required to test the full CRUD API, as the client can only receive data, not add to the DB. It can be found at http://localhost:5000/swagger
 
 ### Running tests
 
 ```bash
 ./runTests.sh
 ```
+
+**NOTE**: This currently only runs the vue example test. I failed to write tests as I went along. I may add to this if I find the time and energy over the coming days, but things are very busy right now.
 
 ### Reasoning for technology choices
 
