@@ -19,6 +19,7 @@ export const useBeanStore = defineStore('beans', {
   getters: {
     getBeans: (state) => state.list,
     getSelectedBeanIndex: (state) => state.selectedBeanIndex,
+    getSelectedBean: (state) => state.list.find((bean) => bean.index === state.selectedBeanIndex),
     getBeanOfTheDayIndex: (state) => state.beanOfTheDayIndex,
     getBeanOfTheDay: (state) => state.list.find((bean) => bean.index === state.beanOfTheDayIndex),
   },
@@ -27,7 +28,7 @@ export const useBeanStore = defineStore('beans', {
       this.list = beans
     },
     setSelectedBeanIndex(index: number) {
-      this.selectedBeanIndex = index
+      this.selectedBeanIndex = index;
     },
     setBeanOfTheDayIndex(index: number) {
       this.beanOfTheDayIndex = index

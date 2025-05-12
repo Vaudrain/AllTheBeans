@@ -33,14 +33,14 @@ onMounted(async () => {
 <template>
   <header>
     <img alt="Background beans" class="background" src="@/assets/backgroundBeans.png" />
-    <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="125" height="125" />
+    <img alt="Beans logo" class="logo" src="@/assets/logo.png" width="125" height="125" />
 
     <div class="wrapper">
       <Title msg="All the Beans!" />
 
       <nav>
         <RouterLink to="/">Bean of the Day</RouterLink>
-        <RouterLink to="/about">Browse Beans</RouterLink>
+        <RouterLink to="/browse">Browse Beans</RouterLink>
       </nav>
     </div>
   </header>
@@ -55,7 +55,7 @@ header {
 }
 
 .background {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   min-width: 100%;

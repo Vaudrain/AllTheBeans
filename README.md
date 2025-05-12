@@ -53,11 +53,12 @@ Swagger is exposed even in production for ease of testing APIs. It can be found 
 - Front End
     - ~~Responsive Layout~~
     - Components
-        - List of beans (with search)
-            - bean list item
-        - Detailed bean view
+        - ~~List of beans (with search)~~
+            - ~~bean list item~~
+        - ~~Detailed bean view~~
         - ~~Bean of the Day (interactable for more info - I'm going to say this is true because it's a page you can navigate to, even though you start there)~~
-    - Order form
+        - Order form
+    - tests?
 - Back End
     - ~~SQL, Redis or mongoDB~~
     - ~~Load from JSON file (save to json file? - no need identified by brief)~~
@@ -69,6 +70,7 @@ Swagger is exposed even in production for ease of testing APIs. It can be found 
     - ~~Hide ID from API using DTO~~
     - ~~Ensure image string format is correct~~
     - ~~Check Docker works~~
+    - tests?
 - Check Integration works in Docker
 
 ---
