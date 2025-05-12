@@ -1,12 +1,22 @@
 <script setup lang="ts">
-import { useBeanStore } from '@/stores/beanStore';
+import { useBeanStore, type Bean } from '@/stores/beanStore';
 import { storeToRefs } from 'pinia';
 import { computed, ref, type Ref } from 'vue';
 import BeanListItem from './BeanListItem.vue';
 
 const beanStore = useBeanStore();
-const { getBasket } = storeToRefs(beanStore);
+const { getBasket, getSelectedBean } = storeToRefs(beanStore);
 const basket = computed(() => getBasket.value || []);
+
+const selectedBean = computed<Bean>(() => getSelectedBean.value || {
+    name: 'No bean selected',
+    description: '',
+    country: '',
+    costGBP: -1,
+    colour: '',
+    image: '',
+    index: -1
+});
 
 const orderbuttonPressed: Ref<boolean> =  ref(false);
 
@@ -22,7 +32,7 @@ const orderbuttonPressed: Ref<boolean> =  ref(false);
         </h3>
         <div class="bean-list">
             <div class="bean-item" v-for="item in basket">
-                <BeanListItem :bean="item.bean" :selected-bean="false" />
+                <BeanListItem :bean="item.bean" :selectedBean="selectedBean.index === item.bean.index" />
             </div>
         </div>
         <button v-if="basket.length !== 0" class="submit-button clear-basket" type="button" @click="beanStore.clearBasket()">Clear Basket</button>

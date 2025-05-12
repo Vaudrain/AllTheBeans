@@ -31,10 +31,6 @@ var searchCriteria = {
 var inputErrorState: boolean = false;
 
 async function search() {
-    console.log('Searching for beans with criteria:', searchCriteria);
-    console.log('http://localhost:5000/api/Beans/search?' + new URLSearchParams(searchCriteria))
-
-
   try {
     const response = await fetch('http://localhost:5000/api/Beans/search?' + new URLSearchParams(searchCriteria));
     if (response.status === 404) {
