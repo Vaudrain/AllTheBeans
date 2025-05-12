@@ -5,6 +5,7 @@ WORKDIR /App
 
 COPY . ./
 RUN dotnet restore
+RUN dotnet build -c docker -o out
 RUN dotnet publish -c docker -o out
 
 # Build runtime image

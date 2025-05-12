@@ -71,7 +71,7 @@ Swagger is exposed even in production for ease of testing APIs. It can be found 
     - ~~Ensure image string format is correct~~
     - ~~Check Docker works~~
     - tests?
-- Check Integration works in Docker
+- ~~Check Integration works in Docker~~
 
 ---
 
