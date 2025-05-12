@@ -41,6 +41,7 @@ const botd = computed<Bean>(() => getBeanOfTheDay.value || {
                 <p>{{ botd.colour }}</p>
             </div>
         </div>
+        <button class="submit-button" type="button" @click="beanStore.addToBasket(botd, 1)">Add to Basket</button>
     </div>
 </template>
 
@@ -54,6 +55,9 @@ const botd = computed<Bean>(() => getBeanOfTheDay.value || {
 .bean-of-the-day {
     text-align: center;
     margin: 20px;
+    background-color: var(--color-background-soft-transparent);
+    padding: 10px;
+    border-radius: 4px;
 }
 
 .botd-img {

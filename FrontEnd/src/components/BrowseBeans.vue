@@ -93,7 +93,7 @@ async function search() {
         <input type="number" id="highestPriceSearch" placeholder="Highest Price" v-model="searchCriteria.higherPrice" />
       </div>
       {{ searchCriteria.name }}
-      <button class="search-button" type="button" @click="search">Search</button>
+      <button class="submit-button" type="button" @click="search">Search</button>
       <div v-if="inputErrorState" class="error">Error fetching beans</div>
     </form>
     <div class="bean-list">
@@ -110,13 +110,19 @@ async function search() {
 @media (min-width: 1024px) {
     .browse-beans {
         padding-top: 100px;
+        margin: 20px 40px 20px 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .browse-beans {
+      margin: 20px 0 0 0;
     }
 }
 
 .browse-beans {
-  margin: 20px 40px 20px 20px;
   width: 100%;
-  background-color: var(--color-background-soft);
+  background-color: var(--color-background-soft-transparent);
   padding: 10px;
   border-radius: 4px;
 }
@@ -167,24 +173,7 @@ async function search() {
 .search-input {
   display: flex;
   flex-direction: column;
-}
-
-.search-button {
-  background-color: var(--color-accent);
-  color: var(--color-background);
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  transition: ease 0.2s;
-  &:hover {
-    background-color: var(--color-highlight);
-  }
-  &:active {
-    transition: none;
-    background-color: var(--color-accent);
-  }
+  width: 150px;
 }
 
 .no-beans {

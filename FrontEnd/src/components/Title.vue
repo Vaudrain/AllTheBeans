@@ -30,10 +30,11 @@ h3 {
   text-align: center;
 }
 
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+.greetings {
+  width: 100%;
+  background-color: var(--color-background-soft-transparent);
+  padding: 10px;
+  border-radius: 4px;
 }
+
 </style>

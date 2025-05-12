@@ -57,7 +57,7 @@ Swagger is exposed even in production for ease of testing APIs. It can be found 
             - ~~bean list item~~
         - ~~Detailed bean view~~
         - ~~Bean of the Day (interactable for more info - I'm going to say this is true because it's a page you can navigate to, even though you start there)~~
-        - Order form
+        - ~~Order form~~
     - tests?
 - Back End
     - ~~SQL, Redis or mongoDB~~

@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import Title from './components/Title.vue';
 import { type Bean, useBeanStore } from './stores/beanStore';
 import { onMounted } from 'vue';
+import Basket from './components/Basket.vue';
 
 const beanStore = useBeanStore();
 
@@ -42,7 +43,8 @@ onMounted(async () => {
         <RouterLink to="/">Bean of the Day</RouterLink>
         <RouterLink to="/browse">Browse Beans</RouterLink>
       </nav>
-    </div>
+    </div>      
+    <Basket />
   </header>
 
   <RouterView />
@@ -51,7 +53,9 @@ onMounted(async () => {
 <style scoped>
 header {
   line-height: 1.5;
-  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
 }
 
 .background {
@@ -71,9 +75,12 @@ header {
 
 nav {
   width: 100%;
-  font-size: 12px;
   text-align: center;
   margin-top: 2rem;
+  font-size: 1rem;
+  background-color: var(--color-background-soft-transparent);
+  padding: 10px;
+  border-radius: 4px;
 }
 
 nav a.router-link-exact-active {
@@ -94,15 +101,16 @@ nav a:first-of-type {
   border: 0;
 }
 
+.logo {
+  background-color: var(--color-background-soft-transparent);
+  padding: 10px;
+  border-radius: 4px;
+}
+
 @media (min-width: 1024px) {
   header {
     display: flex;
     place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
   }
 
   header .wrapper {
@@ -112,9 +120,6 @@ nav a:first-of-type {
   }
 
   nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
 
     padding: 1rem 0;
     margin-top: 1rem;

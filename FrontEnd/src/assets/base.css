@@ -2,10 +2,12 @@
 :root {
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
+  --vt-c-white-soft-transparent: #f8f8f8DA;
   --vt-c-white-mute: #f2f2f2;
 
   --vt-c-black: #181818;
   --vt-c-black-soft: #222222;
+  --vt-c-black-soft-transparent: #222222DA;
   --vt-c-black-mute: #282828;
 
   --vt-c-indigo: #2c3e50;
@@ -25,6 +27,7 @@
 :root {
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
+  --color-background-soft-transparent: var(--vt-c-white-soft-transparent);
   --color-background-mute: var(--vt-c-white-mute);
 
   --color-border: var(--vt-c-divider-light-2);
@@ -42,6 +45,7 @@
   :root {
     --color-background: var(--vt-c-black);
     --color-background-soft: var(--vt-c-black-soft);
+    --color-background-soft-transparent: var(--vt-c-black-soft-transparent);
     --color-background-mute: var(--vt-c-black-mute);
 
     --color-border: var(--vt-c-divider-dark-2);
